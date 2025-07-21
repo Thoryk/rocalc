@@ -1557,20 +1557,34 @@ function BattleCalc999()
 		BattleCalc998();
 	}
 
+	/*
+		n_A_ActiveSkill 106 -> Land Mine
+		n_A_ActiveSkill 112 -> Blast Mine
+		n_A_ActiveSkill 113 -> Claymore Trap
+
+		n_A_BaseLV -> base lvl
+		n_A_DEX -> dex
+		n_A_INT -> int
+		n_A_ActiveSkillLV -> skill lvl
+
+		n_B -> array with monster data
+		n_B[14] -> def
+		n_B[23] -> min soft def
+	*/
 	else if(n_A_ActiveSkill==106 || n_A_ActiveSkill==112 || n_A_ActiveSkill==113){
 		n_PerHIT_DMG = 0;
 		n_Delay[0] = 1;
 		if(n_A_ActiveSkill==106){
 			n_A_Weapon_zokusei = 2;
-			w_DMG[2] = Math.floor((75 + n_A_DEX) * (1+ n_A_INT /100) * n_A_ActiveSkillLV * zokusei[n_B[3]][2]);
+			w_DMG[2] = Math.round(n_A_ActiveSkillLV * (n_A_DEX/2) * (3+n_A_BaseLV/50) * (1+n_A_INT/25) * zokusei[n_B[3]][2] * (100 - n_B[14]) / 100 - n_B[23]);
 		}
 		else if(n_A_ActiveSkill==112){
 			n_A_Weapon_zokusei = 4;
-			w_DMG[2] = Math.floor((50 + n_A_DEX/2) * (1+ n_A_INT /100) * n_A_ActiveSkillLV * zokusei[n_B[3]][4]);
+			w_DMG[2] = Math.round(n_A_ActiveSkillLV * (n_A_DEX/2) * (3+n_A_BaseLV/100) * (1+n_A_INT/40) * zokusei[n_B[3]][4]);
 		}
 		else if(n_A_ActiveSkill==113){
 			n_A_Weapon_zokusei = 3;
-			w_DMG[2] = Math.floor((75 + n_A_DEX/2) * (1+ n_A_INT /100) * n_A_ActiveSkillLV * zokusei[n_B[3]][3]);
+			w_DMG[2] = Math.round(n_A_ActiveSkillLV * (n_A_DEX/2) * (3+n_A_BaseLV/85) * (1+n_A_INT/35) * zokusei[n_B[3]][3] * (100 - n_B[14]) / 100 - n_B[23]);
 		}
 
 		w_DMG[2] = tPlusDamCut(w_DMG[2]);
