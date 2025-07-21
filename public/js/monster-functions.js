@@ -67,8 +67,22 @@ const convertToMonsterOBJ = (database) => {
         monsterArray.push(monster.maxAtk)
         monsterArray.push(monster.def)
         monsterArray.push(monster.mDef)
-        monsterArray.push(monster.baseExp)
-        monsterArray.push(monster.jobExp)
+
+        // arcadia online exp rates
+        if(monster.id == 484) {
+            // anubis has 3x
+            monsterArray.push(monster.baseExp * 3)
+            monsterArray.push(monster.jobExp * 3)
+        } else if(monster.id < 557) {
+            // regular monsters 5x
+            monsterArray.push(monster.baseExp * 5)
+            monsterArray.push(monster.jobExp * 5)
+        } else {
+            // arcadia specific monsters are already 5x in the monster database
+            monsterArray.push(monster.baseExp)
+            monsterArray.push(monster.jobExp)
+        }
+
         monsterArray.push(undefined)
         monsterArray.push(monster.monstertype)
         monsterArray.push(monster.isRanged)
