@@ -1,3 +1,20 @@
+/*
+
+0 -> id
+1 -> type (dagger, sword, headgear, armor, ...)
+2 -> job/class reference
+3 -> atk or def depending on type
+4 -> weapon lvl
+5 -> slots (number or string)
+6 -> weight
+7 -> required base lvl
+8 -> item name
+9 -> unknown, most likely unused as there is no item with a number other than 0
+10 -> item description
+11 ... n -> magic numbers for magical calculations ò_Ó
+
+*/
+
 cItemStart = 1283;
 
 ItemOBJ = [
