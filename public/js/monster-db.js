@@ -1,15 +1,40 @@
-// Race=: 
-// 0=Formless, 1=Undead, 2=Brute, 3=Plant, 4=Insect,
-// 5=Fish, 6=Demon, 7=Demi-Human, 8=Angel, 9=Dragon
-// Elementlevel:
-// 1-4:Neutral1-4; 11-14=Water1-Water4; 21-24=Earth1-4 , 31-34=Fire1-4 ; 41-44=Wind1-4;
-// 51-54=Poison1-4, 61-64=Holy1-4; 71-74=Shadow1-4; 81-84=Ghost1-4; 91-94=Undead1-4;
+// Race Table:
+// 0: Formless
+// 1: Undead
+// 2: Brute
+// 3: Plant
+// 4: Insect
+// 5: Fish
+// 6: Demon
+// 7: Demi-Human
+// 8: Angel
+// 9: Dragon
 
-// monster db
+// Element Table:
+// 1-4: Neutral 1-4
+// 11-14: Water 1-4
+// 21-24: Earth 1-4
+// 31-34: Fire 1-4
+// 41-44: Wind 1-4
+// 51-54: Poison 1-4
+// 61-64: Holy 1-4
+// 71-74: Shadow 1-4
+// 81-84: Ghost 1-4
+// 91-94: Undead 1-4
+
+// Size Table:
+// 1: Medium
+// 2: Large
+// 3: Small
+
+// Region Table:
+// See: region-db.js
+
+// Monster Database
 const monsterDb = [
     {
         "id": 0,
-        "name": "Arc Angeling",
+        "name": "Archangeling",
         "raceId": 8,
         "elementId": 63,
         "sizeId": 1,
@@ -198,7 +223,7 @@ const monsterDb = [
     },
     {
         "id": 7,
-        "name": "Anacondaq",
+        "name": "Anaconda",
         "raceId": 2,
         "elementId": 51,
         "sizeId": 1,
@@ -957,7 +982,7 @@ const monsterDb = [
     },
     {
         "id": 34,
-        "name": "Eggrya",
+        "name": "Eggyra",
         "raceId": 0,
         "elementId": 82,
         "sizeId": 1,
@@ -1349,7 +1374,7 @@ const monsterDb = [
     },
     {
         "id": 48,
-        "name": "Ogretooth",
+        "name": "Tyrfing",
         "raceId": 0,
         "elementId": 73,
         "sizeId": 1,
@@ -3435,7 +3460,7 @@ const monsterDb = [
     },
     {
         "id": 123,
-        "name": "Sucubus",
+        "name": "Succubus",
         "raceId": 6,
         "elementId": 73,
         "sizeId": 1,
@@ -4025,7 +4050,7 @@ const monsterDb = [
     },
     {
         "id": 144,
-        "name": "Abysmal Knight",
+        "name": "Abyssal Knight",
         "raceId": 7,
         "elementId": 74,
         "sizeId": 2,
@@ -8193,7 +8218,7 @@ const monsterDb = [
     },
     {
         "id": 291,
-        "name": "Mysteltainn",
+        "name": "Mistilteinn",
         "raceId": 0,
         "elementId": 74,
         "sizeId": 2,
@@ -8357,7 +8382,7 @@ const monsterDb = [
     },
     {
         "id": 297,
-        "name": "Minorous",
+        "name": "Minouros",
         "raceId": 2,
         "elementId": 32,
         "sizeId": 2,
@@ -8558,7 +8583,7 @@ const monsterDb = [
     },
     {
         "id": 304,
-        "name": "Megladon",
+        "name": "Megalodon",
         "raceId": 1,
         "elementId": 91,
         "sizeId": 1,
@@ -9147,7 +9172,7 @@ const monsterDb = [
     },
     {
         "id": 325,
-        "name": "Quove",
+        "name": "Quve",
         "raceId": 1,
         "elementId": 91,
         "sizeId": 0,
@@ -9202,7 +9227,7 @@ const monsterDb = [
     },
     {
         "id": 327,
-        "name": "Hirozoist",
+        "name": "Hylozoist",
         "raceId": 6,
         "elementId": 72,
         "sizeId": 0,
@@ -9530,7 +9555,7 @@ const monsterDb = [
     },
     {
         "id": 339,
-        "name": "Hatii Babe",
+        "name": "Baby Hati",
         "raceId": 2,
         "elementId": 12,
         "sizeId": 1,
@@ -9917,7 +9942,7 @@ const monsterDb = [
     },
     {
         "id": 353,
-        "name": "Waste Stove",
+        "name": "Old Stove",
         "raceId": 0,
         "elementId": 1,
         "sizeId": 2,
@@ -10055,7 +10080,7 @@ const monsterDb = [
     },
     {
         "id": 358,
-        "name": "Whikebine Tres",
+        "name": "Wickebine Tres",
         "raceId": 7,
         "elementId": 53,
         "sizeId": 1,
@@ -12138,7 +12163,7 @@ const monsterDb = [
     },
     {
         "id": 434,
-        "name": "Kiehl",
+        "name": "Kiel",
         "raceId": 0,
         "elementId": 72,
         "sizeId": 1,
@@ -12165,7 +12190,7 @@ const monsterDb = [
     },
     {
         "id": 435,
-        "name": "Kiel-D-01",
+        "name": "Kiel D-01",
         "raceId": 0,
         "elementId": 72,
         "sizeId": 1,
