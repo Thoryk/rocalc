@@ -460,61 +460,80 @@ Added all changes up until 2010-06-03 (all correct KVM overupgrade bonuses), PLU
 </td></tr></table></div>
 
 <div id="topic">
-<h3>Monster Combat Simulation</h3>
-<table style="width:98%"><tr><td>&nbsp;</td><td>
+	<h3>Monster Combat Simulation</h3>
+		<table style="width: 98%">
+			<tr>
+				<td>&nbsp;</td>
+				<td>
+					<br><span id="nm036"></span>
+					<select name="A_ActiveSkill" onchange="ClickActiveSkill()"></select>
+					<select name="A_ActiveSkillLV" style="visibility:hidden">
+						<option value="1">1
+					</select>
+					&nbsp;&nbsp;
+					<span id="AASkillName"></span>
+					<span id="AASkill"></span><br>
+					<input type="button" value="Calculate" onclick="calc()"><br><br>
 
-<br>
-<span id="nm036"></span><select name="A_ActiveSkill" onchange="ClickActiveSkill()"></select>
-<select name="A_ActiveSkillLV" style="visibility:hidden">
-	<option value="1">1
-</select>
-&nbsp;&nbsp;<span id="AASkillName"></span><span id="AASkill"></span><br>
-
-<input type="button" value="Calculate" onclick="calc()">
-<br>
-<br>
-
-<table align="left" style="width: auto;">
-<tr><td>
-<table style="border: 1px solid #999; border-collapse: collapse; width: 300px;">
-<tr><td colspan="4" bgcolor="#DDDDFF" class="subheader"><span id="nm037"></span><select name="B_Enemy" onchange="calc()"></select></td></tr>
-<tr>
-<td id="nm038"></td><td id="B_6"></td><td id="nm039"></td><td id="B_16"></td>
-</tr>
-<tr>
-<td id="nm040"></td><td><span id="B_12"></span><span id="nm041"></span><span id="B_13"></span></td><td id="nm042"></td><td id="B_17"></td>
-</tr>
-<tr>
-<td id="nm043"></td><td><span id="B_14"></span><span id="B_AA"></span><span id="B_23"></span><span id="B_AC"></span><span id="B_24"></span></td><td id="nm044"></td><td id="B_2"></td>
-</tr>
-<tr>
-<td id="nm045"></td><td><span id="B_15"></span><span id="B_AB"></span><span id="B_25"></span></td><td id="nm046"></td><td id="B_3"></td>
-</tr>
-<tr>
-<td id="nm047"></td><td id="B_21"></td><td id="nm048"></td><td id="B_4"></td>
-</tr>
-<tr>
-<td id="nm049"></td><td id="B_22"></td>
-<td colspan="2">
-<select name="ENEMY_SORT" onchange="EnemySort()|calc()">
-	<option value="0">Alphabetical
-	<option value="1">By attribute
-	<option value="2">By race
-	<option value="3">By 100%Hit
-	<option value="4">By 95%Flee
-	<option value="5">By BaseExp
-	<option value="6">By JobExp
-	<option value="7">By MaxATK
-</select>
-</td>
-</tr>
-<tr><td bgcolor="#DDDDFF" class="subheader">By Place</td>
-<td colspan="3" bgcolor="#DDDDFF" class="subheader"><select name="ENEMY_SORT2" onchange="EnemySort()|calc()"></select></td>
-</tr>
-</table>
-
-</td></tr>
-<tr><td>
+					<table align="left" style="width: auto;">
+					<tr>
+						<td>
+							<table style="border: 1px solid #999; border-collapse: collapse; width: 300px;">
+								<tr>
+									<td colspan="4" bgcolor="#DDDDFF" class="subheader">
+										<span id="nm037"></span>
+										<select name="B_Enemy" onchange="calc()"></select>
+									</td>
+								</tr>
+								<tr>
+									<td id="nm038"></td><td id="B_6"></td>
+									<td id="nm039"></td><td id="B_16"></td>
+								</tr>
+								<tr>
+									<td id="nm040"></td>
+									<td>
+										<span id="B_12"></span>
+										<span id="nm041"></span>
+										<span id="B_13"></span>
+									</td>
+									<td id="nm042"></td>
+									<td id="B_17"></td>
+								</tr>
+								<tr>
+									<td id="nm043"></td><td><span id="B_14"></span><span id="B_AA"></span><span id="B_23"></span><span id="B_AC"></span><span id="B_24"></span></td><td id="nm044"></td><td id="B_2"></td>
+								</tr>
+								<tr>
+									<td id="nm045"></td><td><span id="B_15"></span><span id="B_AB"></span><span id="B_25"></span></td><td id="nm046"></td><td id="B_3"></td>
+								</tr>
+								<tr>
+									<td id="nm047"></td><td id="B_21"></td><td id="nm048"></td><td id="B_4"></td>
+								</tr>
+								<tr>
+									<td id="nm049"></td><td id="B_22"></td>
+									<td colspan="2">
+										<select name="ENEMY_SORT" onchange="EnemySort()|calc()">
+											<option value="0">Alphabetical
+											<option value="1">By attribute
+											<option value="2">By race
+											<option value="3">By 100% Hit
+											<option value="4">By 95% Flee
+											<option value="5">By BaseExp
+											<option value="6">By JobExp
+											<option value="7">By MaxATK
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td bgcolor="#DDDDFF" class="subheader">By Place</td>
+									<td colspan="3" bgcolor="#DDDDFF" class="subheader">
+										<select name="ENEMY_SORT2" onchange="EnemySort()|calc()"></select>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td>
 
 <span id="MONSTER_IJYOU">
 <table style="border: 1px solid #999; border-collapse: collapse; width: auto;">
@@ -648,6 +667,11 @@ Latest updates/translations by Gandi.
 
 </td></tr></table>
 	<script language="JavaScript" src="./js/monster-db.js"></script>
+	<script language="JavaScript" src="./js/region-db.js"></script>
+
+	<script language="JavaScript" src="./js/monster-functions.js"></script>
+	<script language="JavaScript" src="./js/region-functions.js"></script>
+	
 	<script language="JavaScript" src="./js/monster.js"></script>
 	<script language="JavaScript" src="./js/card.js"></script>
 	<script language="JavaScript" src="./js/foot.js"></script>
