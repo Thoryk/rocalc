@@ -6,4 +6,4 @@ const tempSearchItemsFunction = (itemArray) => {
     });
 }
 
-tempSearchItemsFunction(ItemOBJ)
+// tempSearchItemsFunction(ItemOBJ)
