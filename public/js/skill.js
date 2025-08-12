@@ -112,7 +112,7 @@ SkillOBJ = [
 [110,5,"Sandman"],
 [111,5,"Freezing Trap"],
 [112,5,"Blast Mine"],
-[113,5,"Claymore Trap"],
+[113,10,"Claymore Trap"],
 [114,1,"Remove Trap"],
 [115,1,"Talkie Box"],
 [116,10,"Beast Bane"],
