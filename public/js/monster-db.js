@@ -16063,7 +16063,7 @@ const monsterDb = [
         "dex": 36,
         "luk": 96,
         "minAtk": 332,
-        "maxAtk": 7556,
+        "maxAtk": 756,
         "def": 7,
         "mDef": 43,
         "baseExp": 35150,
