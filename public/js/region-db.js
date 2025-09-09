@@ -67,4 +67,5 @@ const regionDb = [
   { id: 65, name: "Sideworld Sograt Desert" },
   { id: 66, name: "Sideworld Pyramids" },
   { id: 67, name: "Sideworld Atelier Dungeon" },
+  { id: 68, name: "Sideworld Prontera Culverts" },
 ];

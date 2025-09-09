@@ -96,11 +96,20 @@ MonsterOBJ = convertToMonsterOBJ(monsterDb)
 EnemyNum = MonsterOBJ.length -1;
 MonsterABC = createMonsterSortingArray(monsterDb)
 
-var tiiki = createFlatRegionNameArray(regionDb)
-
-if(Taijin==0){
-	for(var i=0;i < tiiki.length;i++)
-		document.calcForm.ENEMY_SORT2.options[i] = new Option(tiiki[i],i);
-}
+regionDb.toSorted((a, b) => {
+	if(a.id == 0 || b.id == 0) {
+		return 0;
+	}
+	if(a.name < b.name) { 
+		return -1; 
+	}
+	if(a.name > b.name) { 
+		return 1; 
+	}
+	return 0;
+	
+}).forEach((el, index) => {
+	document.calcForm.ENEMY_SORT2.options[index] = new Option(el.name, el.id);
+})
 
 MonMap = createMonMapArray(monsterDb, regionDb)

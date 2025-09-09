@@ -4352,7 +4352,8 @@ const monsterDb = [
         "hit95": 126,
         "flee95": 256,
         "regionIds": [
-            14
+            14,
+            68
         ]
     },
     {
@@ -15694,8 +15695,7 @@ const monsterDb = [
         "hit95": 162,
         "flee95": 209,
         "regionIds": [
-            63,
-            64
+            63
         ]
     },
     {
@@ -15803,7 +15803,9 @@ const monsterDb = [
         "isRanged": 0,
         "hit95": 198,
         "flee95": 286,
-        "regionIds": []
+        "regionIds": [
+            64
+        ]
     },
     {
         "id": 569,
@@ -16073,7 +16075,7 @@ const monsterDb = [
         "hit95": 213,
         "flee95": 203,
         "regionIds": [
-            66
+            68
         ]
     },
     {
@@ -16154,7 +16156,6 @@ const monsterDb = [
         "hit95": 156,
         "flee95": 215,
         "regionIds": [
-            65,
             66
         ]
     },
@@ -16182,7 +16183,7 @@ const monsterDb = [
         "hit95": 200,
         "flee95": 214,
         "regionIds": [
-            66
+            68
         ]
     },
     {
@@ -16209,8 +16210,8 @@ const monsterDb = [
         "hit95": 164,
         "flee95": 248,
         "regionIds": [
-            63,
-            65
+            65,
+            66
         ]
     },
     {
@@ -16237,7 +16238,7 @@ const monsterDb = [
         "hit95": 270,
         "flee95": 270,
         "regionIds": [
-            65
+            66
         ]
     },
     {
@@ -16264,7 +16265,7 @@ const monsterDb = [
         "hit95": 135,
         "flee95": 185,
         "regionIds": [
-            66
+            63
         ]
     },
     {
@@ -16291,7 +16292,7 @@ const monsterDb = [
         "hit95": 158,
         "flee95": 201,
         "regionIds": [
-            66
+            65
         ]
     },
     {
@@ -16345,7 +16346,7 @@ const monsterDb = [
         "hit95": 135,
         "flee95": 226,
         "regionIds": [
-            63
+            65
         ]
     },
     {
@@ -16372,7 +16373,7 @@ const monsterDb = [
         "hit95": 160,
         "flee95": 291,
         "regionIds": [
-            63
+            66
         ]
     },
     {
@@ -16399,7 +16400,7 @@ const monsterDb = [
         "hit95": 154,
         "flee95": 262,
         "regionIds": [
-            63
+            66
         ]
     },
     {
@@ -16426,8 +16427,7 @@ const monsterDb = [
         "hit95": 155,
         "flee95": 200,
         "regionIds": [
-            63,
-            64
+            63
         ]
     },
     {
@@ -16454,7 +16454,7 @@ const monsterDb = [
         "hit95": 138,
         "flee95": 194,
         "regionIds": [
-            64
+            63
         ]
     },
     {
@@ -16481,7 +16481,7 @@ const monsterDb = [
         "hit95": 147,
         "flee95": 200,
         "regionIds": [
-            65
+            63
         ]
     },
     {
@@ -16508,7 +16508,8 @@ const monsterDb = [
         "hit95": 186,
         "flee95": 243,
         "regionIds": [
-            65
+            63,
+            64
         ]
     },
     {
@@ -16562,7 +16563,7 @@ const monsterDb = [
         "hit95": 142,
         "flee95": 230,
         "regionIds": [
-            64
+            65
         ]
     },
     {
@@ -16588,7 +16589,9 @@ const monsterDb = [
         "isRanged": 0,
         "hit95": 141,
         "flee95": 179,
-        "regionIds": []
+        "regionIds": [
+            65
+        ]
     },
     {
         "id": 598,
@@ -16613,7 +16616,9 @@ const monsterDb = [
         "isRanged": 0,
         "hit95": 151,
         "flee95": 277,
-        "regionIds": []
+        "regionIds": [
+            66
+        ]
     },
     {
         "id": 599,
@@ -16908,7 +16913,10 @@ const monsterDb = [
         "isRanged": 0,
         "hit95": 172,
         "flee95": 261,
-        "regionIds": []
+        "regionIds": [
+            64,
+            67
+        ]
     },
     {
         "id": 610,
@@ -16933,7 +16941,9 @@ const monsterDb = [
         "isRanged": 0,
         "hit95": 157,
         "flee95": 228,
-        "regionIds": []
+        "regionIds": [
+            65
+        ]
     },
     {
         "id": 611,
@@ -16958,7 +16968,9 @@ const monsterDb = [
         "isRanged": 0,
         "hit95": 199,
         "flee95": 258,
-        "regionIds": []
+        "regionIds": [
+            67
+        ]
     },
     {
         "id": 612,
@@ -16983,6 +16995,8 @@ const monsterDb = [
         "isRanged": 0,
         "hit95": 215,
         "flee95": 297,
-        "regionIds": []
+        "regionIds": [
+            64
+        ]
     }
 ]
