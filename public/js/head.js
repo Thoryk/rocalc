@@ -1030,23 +1030,80 @@ function BattleCalc999()
 		BattleCalc998();
 	}
 
-	else if(n_A_ActiveSkill==159 || n_A_ActiveSkill==384)
-	{
+	// Shield Boomerang or Shield Boomerang (Soul linked)
+	else if(n_A_ActiveSkill==159 || n_A_ActiveSkill==384) {
 		n_PerHIT_DMG = 0;
 		n_Enekyori=1;
-		n_A_Weapon_zokusei = 0;
+		n_A_Weapon_zokusei = 0; // Element
 		n_Delay[2] = 0.7;
-		if(n_A_ActiveSkill==384)
+
+		if(n_A_ActiveSkill==384) {
 			n_Delay[2] = 0.35;
-		wSBr = n_A_LEFT_DEF_PLUS *4;
+		}
 
-		wbairitu2 = (1 + n_A_ActiveSkillLV *0.3);
-		if(n_A_ActiveSkill==384)
+		// --------------------------------------------
+		// Calculation for Arcadia Online
+		// --------------------------------------------
+		arc_shieldWeight = ItemOBJ[n_A_Equip[5]][6];
+		arc_shieldRefine = n_A_LEFT_DEF_PLUS;
+
+		arc_shieldSkillModifier = 1 + n_A_ActiveSkillLV * 0.3;
+		arc_soulLinkedModifier = n_A_ActiveSkill == 384 ? 2 : 1;
+		
+		// 0 for no modifier, 0.05 for lvl 1-5
+		arc_powerThrustModifier = n_A_PassSkill2[8] > 0 ? 0.05 : 0;
+
+		arc_str = n_A_STR; // base str + bonus
+		arc_dex = n_A_DEX;
+		arc_luk = n_A_LUK;
+
+		arc_strAtk = Math.floor(n_A_STR/10) * Math.floor(n_A_STR/10);
+		arc_dexAtk = Math.floor(n_A_DEX/5);
+		arc_lukAtk = Math.floor(n_A_LUK/5);
+
+		arc_tamruanCard = n_A_card[10] == 396;
+		arc_tamruanCardModifier = arc_tamruanCard ? 1.1 : 1
+
+		arc_baseDmg = Math.floor(Math.floor((arc_shieldWeight + arc_shieldRefine * 4 + arc_str + arc_dexAtk + arc_lukAtk + arc_strAtk) * (arc_shieldSkillModifier + arc_powerThrustModifier))*arc_tamruanCardModifier*arc_soulLinkedModifier)
+		
+		arc_hardDef = n_B[14];
+		arc_softDef = n_B_DEF2[0];
+
+		arc_dmgReduction = Math.floor(arc_baseDmg*(1-arc_hardDef/100))-(arc_softDef+Math.max(0, Math.floor(arc_softDef/20)^2-1));
+		arc_finalDamage = Math.round(BaiCI(arc_dmgReduction) / arc_tamruanCardModifier);
+		arc_finalDamage = Math.floor(zokusei[n_B[3]][0] * arc_finalDamage);
+
+		// set variables for calculator
+		for(var i=0; i<=2; i++) {
+			w_DMG[i] = arc_finalDamage < 0 ? 1 : arc_finalDamage;
+			Last_DMG_A[i] = Last_DMG_B[i] = w_DMG[i];
+			InnStr[i] += Last_DMG_A[i];
+		}
+
+		w_DMG[1] = (w_DMG[1] * w_HIT) / 100;
+
+		/*
+		// Shield refine rate
+		wSBr = n_A_LEFT_DEF_PLUS * 4;
+
+		// ATK multiplyer by skill level
+		// two times for soul linked
+		wbairitu2 = (1 + n_A_ActiveSkillLV * 0.3);
+		if(n_A_ActiveSkill == 384) {
 			wbairitu2 *= 2;
+		}
 
+		// STR Bonus
 		n_A_ATK_w = Math.round(Math.floor(n_A_STR/10) * Math.floor(n_A_STR/10));
-		n_A_ATK   = n_A_STR + n_A_ATK_w + Math.floor(n_A_DEX / 5) + Math.floor(n_A_LUK / 5);
 
+		// ATK
+		n_A_ATK = n_A_STR + n_A_ATK_w + Math.floor(n_A_DEX / 5) + Math.floor(n_A_LUK / 5);
+
+		// n_B[3] -> monster element
+		// n_B[14] -> monster hard def
+		// n_B_DEF2 -> monster soft def
+		// zokusei -> element table
+		// BaiCI -> function to calculate dmg from card modifiers, i.e. 100 dmg -> 80% cards -> 180 dmg, tamruan etc.
 		for(var i=0;i<=2;i++){
 			w_DMG[i] = n_A_ATK * wbairitu + ItemOBJ[n_A_Equip[5]][6] + wSBr;
 			w_DMG[i] = Math.floor(Math.floor(w_DMG[i] * (100 - n_B[14]) /100 - n_B_DEF2[i]) * wbairitu2);
@@ -1057,6 +1114,7 @@ function BattleCalc999()
 			InnStr[i] += Last_DMG_A[i];
 		}
 		w_DMG[1] = (w_DMG[1] * w_HIT)/100;
+		*/
 
 		CastAndDelay();
 		BattleCalc998();
@@ -4710,6 +4768,7 @@ function calc()
 	}
 	if(n_A_ActiveSkill==324)
 		w_HIT += 20;
+	// Shield Boomerang (Soul linked) -> 100% hit
 	if(n_A_ActiveSkill==384){
 		w_HIT = 100;
 	}
