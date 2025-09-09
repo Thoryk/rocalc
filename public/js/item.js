@@ -460,7 +460,7 @@ ItemOBJ = [
 ,[439,64,0,0,0,0,10,0,"Silver Ring",0,0,0]
 ,[440,64,0,0,0,0,10,0,"Gold Ring",0,0,0]
 ,[441,64,0,0,0,0,10,0,"Diamond Ring",0,0,0]
-,[442,64,52,0,0,0,10,70,"Rogue's Treasure",0,"[description translation missing - ItemID: 442]",0]
+,[442,64,52,0,0,0,10,70,"Rogue's Treasure",0,getItemDescription(442),0]
 ,[443,999,999,2,0,0,35,45,"Wing of Diablo",0,0,0]
 ,[444,999,999,5,0,0,10,0,"Lord Kaho's Horns",0,0,0]
 ,[445,52,81,0,0,0,10,70,"Assassin Mask",0,0,0]
