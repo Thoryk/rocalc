@@ -3010,10 +3010,10 @@ function WeaponSet()
 	work = new Array();
 	j = 0;
 	for (i=0;i<=ItemMax; i++)	{
-		if(ItemOBJ[i][1] == n_A_WeaponType && JobEquipItemSearch(ItemOBJ[i][2]) == 1){
+		if(ItemOBJ[i][1] == n_A_WeaponType && JobEquipItemSearch(ItemOBJ[i][2]) == 1 && !itemIdBlacklistFilter(i)){
 			work[j] = i;
 			j++;
-		}else if(ItemOBJ[i][4] == 4 && ItemOBJ[i][1] == n_A_WeaponType && SuperNoviceFullWeaponCHECK){
+		}else if(ItemOBJ[i][4] == 4 && ItemOBJ[i][1] == n_A_WeaponType && SuperNoviceFullWeaponCHECK && !itemIdBlacklistFilter(i)){
 			work[j] = i;
 			j++;
 		}
@@ -3022,9 +3022,9 @@ function WeaponSet()
 
 
 	work = sort(work);
-	for (i=0;i<j; i++)
+	for (i=0; i<j; i++) {
 		document.calcForm.A_weapon1.options[i] = new Option(ItemOBJ[work[i]][8],ItemOBJ[work[i]][0]);
-
+	}
 }
 
 function WeaponSetLeft()
@@ -3100,35 +3100,35 @@ with(document.calcForm){
 	for(i=0;i<=7;i++)
 		wsj[i]=0;
 	for(i=0;i<=ItemMax; i++){
-		if(ItemOBJ[i][1] == 50 && (JobEquipItemSearch(ItemOBJ[i][2]) == 1 || SuperNoviceFullWeaponCHECK)){
+		if(ItemOBJ[i][1] == 50 && (JobEquipItemSearch(ItemOBJ[i][2]) == 1 || SuperNoviceFullWeaponCHECK) && !itemIdBlacklistFilter(i)){
 			workB[0][wsj[0]] = i;
 			wsj[0]++;
 		}
-		else if(ItemOBJ[i][1] == 51 && (JobEquipItemSearch(ItemOBJ[i][2]) == 1 || SuperNoviceFullWeaponCHECK)){
+		else if(ItemOBJ[i][1] == 51 && (JobEquipItemSearch(ItemOBJ[i][2]) == 1 || SuperNoviceFullWeaponCHECK) && !itemIdBlacklistFilter(i)){
 			workB[1][wsj[1]] = i;
 			wsj[1]++;
 		}
-		else if(ItemOBJ[i][1] == 52 && (JobEquipItemSearch(ItemOBJ[i][2]) == 1 || SuperNoviceFullWeaponCHECK)){
+		else if(ItemOBJ[i][1] == 52 && (JobEquipItemSearch(ItemOBJ[i][2]) == 1 || SuperNoviceFullWeaponCHECK) && !itemIdBlacklistFilter(i)){
 			workB[2][wsj[2]] = i;
 			wsj[2]++;
 		}
-		else if(ItemOBJ[i][1] == 61 && JobEquipItemSearch(ItemOBJ[i][2]) == 1){
+		else if(ItemOBJ[i][1] == 61 && JobEquipItemSearch(ItemOBJ[i][2]) == 1 && !itemIdBlacklistFilter(i)){
 			workB[3][wsj[3]] = i;
 			wsj[3]++;
 		}
-		else if(ItemOBJ[i][1] == 60 && JobEquipItemSearch(ItemOBJ[i][2]) == 1){
+		else if(ItemOBJ[i][1] == 60 && JobEquipItemSearch(ItemOBJ[i][2]) == 1 && !itemIdBlacklistFilter(i)){
 			workB[4][wsj[4]] = i;
 			wsj[4]++;
 		}
-		else if(ItemOBJ[i][1] == 62 && JobEquipItemSearch(ItemOBJ[i][2]) == 1){
+		else if(ItemOBJ[i][1] == 62 && JobEquipItemSearch(ItemOBJ[i][2]) == 1 && !itemIdBlacklistFilter(i)){
 			workB[5][wsj[5]] = i;
 			wsj[5]++;
 		}
-		else if(ItemOBJ[i][1] == 63 && JobEquipItemSearch(ItemOBJ[i][2]) == 1){
+		else if(ItemOBJ[i][1] == 63 && JobEquipItemSearch(ItemOBJ[i][2]) == 1 && !itemIdBlacklistFilter(i)){
 			workB[6][wsj[6]] = i;
 			wsj[6]++;
 		}
-		else if(ItemOBJ[i][1] == 64 && JobEquipItemSearch(ItemOBJ[i][2]) == 1){
+		else if(ItemOBJ[i][1] == 64 && JobEquipItemSearch(ItemOBJ[i][2]) == 1 && !itemIdBlacklistFilter(i)){
 			workB[7][wsj[7]] = i;
 			wsj[7]++;
 		}
