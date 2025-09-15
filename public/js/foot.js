@@ -3474,7 +3474,17 @@ function KakutyouKansuu(){
 		EquipKG = 0;
 		for(i=0;i<=10;i++)
 			EquipKG += ItemOBJ[n_A_Equip[i]][6];
-		myInnerHtml("A_KakutyouData","Weight Limit: "+syoziryou+"<BR>Total Weight of Equipment: "+EquipKG,0);
+
+		EquipPercent = EquipKG == 0 ? 0 : Number.parseFloat(EquipKG / syoziryou * 100).toFixed(2);
+		EquipPercentStyle = "";
+		if(EquipPercent > 49){
+			EquipPercentStyle = ' style="color: orange;"';
+		}
+		if(EquipPercent > 89){
+			EquipPercentStyle = ' style="color: red;"';
+		}
+		
+		myInnerHtml("A_KakutyouData","Weight Limit: "+syoziryou+"<BR>Total Weight of Equipment: "+EquipKG+"<BR><span"+EquipPercentStyle+">Percent: "+EquipPercent+"%</span>",0);
 	}
 	else if(wKK == 6){
 		CBIstr = "<Font size=2><B>";
