@@ -769,9 +769,62 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	else
 		myInnerHtml("A_MaxHP"," "+n_A_MaxHP,0);
 
-	JobSP_A = new Array(1,2,2,5,2,6,3,3,4,8,4,9,4,4.7,5,4.7,6,6,7,4,1,3,4,8,4,9,4,4.7,5,4.7,6,6,7,4,0,0,0,0,0,0,0,2,4.7,9,3.75,3.75);
 
+	// ---------------------------
+	// BEGIN of MaxSP calculation
+	// ---------------------------
 
+	// Job modifiers
+	JobSP_A = new Array(
+		1, // Novice
+		2, // Swordsman
+		2, // Thief
+		5, // Acolyte
+		2, // Archer
+		6, // Magician
+		3, // Merchant
+		3, // Knight
+		4, // Assassin
+		8, // Priest
+		4, // Hunter
+		9, // Wizard
+		4, // Blacksmith
+		4.7, // Crusader
+		5, // Rogue
+		4.7, // Monk
+		6, // Bard
+		6, // Dancer
+		7, // Sage
+		4, // Alchemist
+		1, // Super Novice
+		3, // Lord Knight
+		4, // Assassin Cross
+		8, // High Priest
+		4, // Sniper
+		9, // High Wizard
+		4, // Whitesmith
+		4.7, // Paladin
+		5, // Stalker
+		4.7, // Champion
+		6, // Clown
+		6, // Gypsy
+		7, // Scholar
+		4, // Creator
+		0, // High Novice
+		0, // High Swordsman
+		0, // High Thief
+		0, // High Acolyte
+		0, // High Archer
+		0, // High Magician
+		0, // High Merchant
+		2, // Taekwon Kid
+		4.7, // Taekwon Master
+		9, // Soul Linker
+		3.75, // Ninja
+		3.75 // Gunslinger
+	);
+
+	// Soul Linker SP modifier
 	wSPSL = 0;
 	if(n_A_JOB == 43){
 		if(n_A_BaseLV >= 70){
@@ -787,8 +840,10 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		}
 	}
 
+	// Base Level and class modifier
 	n_A_MaxSP = Math.floor(10 + n_A_BaseLV * JobSP_A[n_A_JOB] - wSPSL);
 
+	// Ninja
 	if(n_A_JOB == 44){
 		if(n_A_BaseLV <= 20) n_A_MaxSP = 11 + n_A_BaseLV * 3;
 		else if(n_A_BaseLV <= 40) n_A_MaxSP = 71 +(n_A_BaseLV-20)*4;
@@ -797,6 +852,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		else n_A_MaxSP = 370 +(n_A_BaseLV-80)*8;
 	}
 
+	// Gunslinger
 	if(n_A_JOB == 45){
 		if(n_A_BaseLV <= 25) n_A_MaxSP = 10 + n_A_BaseLV * 3;
 		else if(n_A_BaseLV <= 35) n_A_MaxSP = 85 +(n_A_BaseLV-25)*4;
@@ -807,13 +863,20 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		else n_A_MaxSP = 330 +(n_A_BaseLV-78)*6;
 	}
 
-	if(n_Tensei)
-		n_A_MaxSP = Math.floor(n_A_MaxSP * 125 /100);
-	if(eval(A_youshi.checked))
-		n_A_MaxSP = Math.floor(n_A_MaxSP *70 /100);
-	n_A_MaxSP = Math.floor(n_A_MaxSP * (100 + n_A_INT) / 100);
+	if(n_Tensei) { // n_Tensei -> transcendent classes
+		n_A_MaxSP = Math.floor(n_A_MaxSP * 125 / 100);
+	}
 
+	if(eval(A_youshi.checked)) { // A_youshi.checked -> baby
+		n_A_MaxSP = Math.floor(n_A_MaxSP * 70 / 100);
+	}
 
+	// Int modifier
+	// OLD: n_A_MaxSP = Math.floor(n_A_MaxSP * (100 + n_A_INT) / 100);
+	// TEST: int mod without bless -> add bless sp mod AFTER % modifiers as separate bonus
+	n_A_MaxSP = Math.floor(n_A_MaxSP * (100 + n_A_INT - n_A_PassSkill2[0]) / 100);
+
+	// Taekwon Kid
 	if(n_A_JOB == 41 && n_A_BaseLV >= 70){
 		if(n_A_BaseLV <=79)
 			n_A_MaxSP = Math.floor((150 + 1 * (n_A_BaseLV-70)) * (100 + n_A_INT) / 100);
@@ -827,6 +890,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		}
 	}
 
+	// Taekwon Master
 	if(n_A_JOB == 42 && n_A_BaseLV >= 70){
 		if(n_A_BaseLV <=79)
 			n_A_MaxSP = Math.floor((339 + 2 * (n_A_BaseLV-70)) * (100 + n_A_INT) / 100);
@@ -836,99 +900,122 @@ n_A_MaxHP += SkillSearch(156) * 200;
 			n_A_MaxSP = Math.floor((430 + 3 * (n_A_BaseLV-90)) * (100 + n_A_INT) / 100);
 	}
 
+	// Flat SP bonus addition	
 	w=0;
 
-	w += n_tok[14];
+	w += n_tok[14]; // n_tok -> ???
+
+	// Get SP bonus from Equipment, takes this from index 11 and 12 of the ItemOBJ array
+	// FIXME: this also adds one SP for each INT from the equipment, ie. from earring, morph hood, etc.
 	w += StPlusCalc2(4);
 	w += StPlusCalc2(7);
-	if(n_A_HEAD_DEF_PLUS >= 9 && n_A_card[8] == 298)
-		w += 150;
-	if(n_A_HEAD_DEF_PLUS <= 4 && n_A_card[8]==179)
-		w += 40;
-	if(n_A_card[9]==179)
-		w += 40;
-	if(n_A_JobSearch()==5)
-		w += 100 * CardNumSearch(474);
-	if(n_A_JobSearch()==5)
-		w += 100 * CardNumSearch(476);
 
-	if(SkillSearch(372))
+	if(n_A_HEAD_DEF_PLUS >= 9 && n_A_card[8] == 298) // Carat Card
+		w += 150;
+	if(n_A_HEAD_DEF_PLUS <= 4 && n_A_card[8] == 179) // Blue Acidus
+		w += 40;
+	if(n_A_card[9] == 179) // Blue Acidus
+		w += 40;
+	if(n_A_JobSearch() == 5) // Mage Class
+		w += 100 * CardNumSearch(474); // Banshee Card
+	if(n_A_JobSearch() == 5) // Mage Class
+		w += 100 * CardNumSearch(476); // Agav Card
+
+	if(SkillSearch(372)) // Kaina Skill
 		w += 30 * SkillSearch(372);
-	if(n_A_Equip[8]==536){
+	if(n_A_Equip[8] == 536){ // Valkyrian Shoes
 		wSPVS = n_A_JobSearch();
-		if(wSPVS==1 || wSPVS==2 || wSPVS==6)
+		if(wSPVS == 1 || wSPVS == 2 || wSPVS == 6) // Swordsman, Merchant, Thief Class
 			w += 2 * n_A_JobLV;
 	}
+
 	// customS MAXSP
 
 	// sigrun's wings
-	if(n_A_JobSearch()==0 && EquipNumSearch(cItemStart+8))
+	if(n_A_JobSearch() == 0 && EquipNumSearch(cItemStart+8))
 		w += 30;
 
-
 	// customE
-	if(n_A_Weapon_ATKplus >= 9 && EquipNumSearch(642))
+	if(n_A_Weapon_ATKplus >= 9 && EquipNumSearch(642)) // Lich's Bone Wand
 		w += 300;
-	if(EquipNumSearch(883) && n_A_BaseLV <= 79)
+	if(EquipNumSearch(883) && n_A_BaseLV <= 79) // Badge Academy
 		w += 200 * EquipNumSearch(883);
-	if(EquipNumSearch(762))
+	if(EquipNumSearch(762)) // Brynhild
 		w += 5 * n_A_BaseLV;
-	if(EquipNumSearch(1118) && n_A_JobSearch()==3)
+	if(EquipNumSearch(1118) && n_A_JobSearch() == 3) // Acolyte Figurine + Acolyte Class
 		w += 50;
-	if(EquipNumSearch(770))
+	if(EquipNumSearch(770)) // ???
 		w += n_A_JobLV;
-	if(EquipNumSearch(986))
+	if(EquipNumSearch(986)) // Chameleon Armor
 		w += Math.floor(0.5 * n_A_BaseLV);
-	if(n_A_Weapon_ATKplus >= 6 && EquipNumSearch(1168))
+	if(n_A_Weapon_ATKplus >= 6 && EquipNumSearch(1168)) // Withered Branch Staff
 		w += -100;
-	if(EquipNumSearch(1193))
+	if(EquipNumSearch(1193)) // Proxy Skin Fragment 
 		w += Math.floor(n_A_BaseLV / 3) + n_A_SHOULDER_DEF_PLUS * 10;
 
+	// Add to max SP
 	n_A_MaxSP += w;
 
+	// Set to 0 if below 0
 	if(n_A_MaxSP < 0)
 		n_A_MaxSP = 0;
 
+
+	// Percentage SP addition
 	w=0;
 
-	w += n_tok[16];
-	if(n_A_SHOES_DEF_PLUS >= 9 && CardNumSearch(304))
+	w += n_tok[16]; // n_tok -> ???
+	if(n_A_SHOES_DEF_PLUS >= 9 && CardNumSearch(304)) // Firelock Soldier
 		w += 10;
-	if(n_A_SHOES_DEF_PLUS <= 4 && CardNumSearch(407))
+
+	if(n_A_SHOES_DEF_PLUS <= 4 && CardNumSearch(407)) // Gold Acidus
 		w += 4;
 
-	if(CardNumSearch(405)){
-		if(n_A_JobSearch()==3 || n_A_JobSearch()==4 || n_A_JobSearch()==5)
+	if(CardNumSearch(405)){ // Aliot
+		if(n_A_JobSearch() == 3 || n_A_JobSearch() == 4 || n_A_JobSearch() == 5) // Magician Class, Acolyte Class, Archer Class
 			w += 5;
 	}
+
 	/* jRO exclusive KVM armor changes
 	if(n_A_SHOES_DEF_PLUS >= 7 && EquipNumSearch(1108))
 		w += 7;
 	*/
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1278))
+
+	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1278)) // +Romantic Flower
 		w += (n_A_HEAD_DEF_PLUS - 6);
 
+	w += SkillSearch(269); // Mediatio
 
-	w += SkillSearch(269);
-
-	w += SkillSearch(274) *2;
+	w += SkillSearch(274) *2; // Soul Drain
 	if(n_A_PassSkill5[2])
 		w += 100;
-	if(EquipNumSearch(715))
+
+	if(EquipNumSearch(715)) // Variant Shoes
 		w -= n_A_SHOES_DEF_PLUS;
 
-	if(n_A_PassSkill3[6])
+	if(n_A_PassSkill3[6]) // Dancer SP song, index=6 skill lvl, index=36 dance lessons, index=26 dancer int
 		w += 15 + n_A_PassSkill3[6] + Math.floor(n_A_PassSkill3[36] / 2) + Math.floor(n_A_PassSkill3[26] /10);
 
-	n_A_MaxSP = Math.floor(n_A_MaxSP * (100 + w)/100);
+	// apply percentage bonus 
+	n_A_MaxSP = Math.floor(n_A_MaxSP * (100 + w) / 100);
 
+	// Bonus SP from blessing
+	if(n_Tensei) {
+		n_A_MaxSP = n_A_MaxSP + Math.floor(n_A_PassSkill2[0] * JobSP_A[n_A_JOB] * n_A_BaseLV / 100 * 1.25)
+	} else {
+		n_A_MaxSP = n_A_MaxSP + Math.floor(n_A_PassSkill2[0] * JobSP_A[n_A_JOB] * n_A_BaseLV / 100)
+	}
 
-	if(n_A_MaxSP >= 100)
-		myInnerHtml("A_MaxSP",n_A_MaxSP,0);
-	else
-		myInnerHtml("A_MaxSP"," "+n_A_MaxSP,0);
+	// output
+	if(n_A_MaxSP >= 100) {
+		myInnerHtml("A_MaxSP", n_A_MaxSP, 0);
+	} else {
+		myInnerHtml("A_MaxSP", " " + n_A_MaxSP, 0);
+	}
 
-
+	// -------------------------
+	// END of MaxSP calculation
+	// -------------------------
 
 	n_A_DEF = n_tok[18];
 
@@ -3010,10 +3097,10 @@ function WeaponSet()
 	work = new Array();
 	j = 0;
 	for (i=0;i<=ItemMax; i++)	{
-		if(ItemOBJ[i][1] == n_A_WeaponType && JobEquipItemSearch(ItemOBJ[i][2]) == 1 && !itemIdBlacklistFilter(i)){
+		if(ItemOBJ[i][1] == n_A_WeaponType && JobEquipItemSearch(ItemOBJ[i][2]) == 1 && !isItemOnBlacklist(i)){
 			work[j] = i;
 			j++;
-		}else if(ItemOBJ[i][4] == 4 && ItemOBJ[i][1] == n_A_WeaponType && SuperNoviceFullWeaponCHECK && !itemIdBlacklistFilter(i)){
+		}else if(ItemOBJ[i][4] == 4 && ItemOBJ[i][1] == n_A_WeaponType && SuperNoviceFullWeaponCHECK && !isItemOnBlacklist(i)){
 			work[j] = i;
 			j++;
 		}
@@ -3100,35 +3187,35 @@ with(document.calcForm){
 	for(i=0;i<=7;i++)
 		wsj[i]=0;
 	for(i=0;i<=ItemMax; i++){
-		if(ItemOBJ[i][1] == 50 && (JobEquipItemSearch(ItemOBJ[i][2]) == 1 || SuperNoviceFullWeaponCHECK) && !itemIdBlacklistFilter(i)){
+		if(ItemOBJ[i][1] == 50 && (JobEquipItemSearch(ItemOBJ[i][2]) == 1 || SuperNoviceFullWeaponCHECK) && !isItemOnBlacklist(i)){
 			workB[0][wsj[0]] = i;
 			wsj[0]++;
 		}
-		else if(ItemOBJ[i][1] == 51 && (JobEquipItemSearch(ItemOBJ[i][2]) == 1 || SuperNoviceFullWeaponCHECK) && !itemIdBlacklistFilter(i)){
+		else if(ItemOBJ[i][1] == 51 && (JobEquipItemSearch(ItemOBJ[i][2]) == 1 || SuperNoviceFullWeaponCHECK) && !isItemOnBlacklist(i)){
 			workB[1][wsj[1]] = i;
 			wsj[1]++;
 		}
-		else if(ItemOBJ[i][1] == 52 && (JobEquipItemSearch(ItemOBJ[i][2]) == 1 || SuperNoviceFullWeaponCHECK) && !itemIdBlacklistFilter(i)){
+		else if(ItemOBJ[i][1] == 52 && (JobEquipItemSearch(ItemOBJ[i][2]) == 1 || SuperNoviceFullWeaponCHECK) && !isItemOnBlacklist(i)){
 			workB[2][wsj[2]] = i;
 			wsj[2]++;
 		}
-		else if(ItemOBJ[i][1] == 61 && JobEquipItemSearch(ItemOBJ[i][2]) == 1 && !itemIdBlacklistFilter(i)){
+		else if(ItemOBJ[i][1] == 61 && JobEquipItemSearch(ItemOBJ[i][2]) == 1 && !isItemOnBlacklist(i)){
 			workB[3][wsj[3]] = i;
 			wsj[3]++;
 		}
-		else if(ItemOBJ[i][1] == 60 && JobEquipItemSearch(ItemOBJ[i][2]) == 1 && !itemIdBlacklistFilter(i)){
+		else if(ItemOBJ[i][1] == 60 && JobEquipItemSearch(ItemOBJ[i][2]) == 1 && !isItemOnBlacklist(i)){
 			workB[4][wsj[4]] = i;
 			wsj[4]++;
 		}
-		else if(ItemOBJ[i][1] == 62 && JobEquipItemSearch(ItemOBJ[i][2]) == 1 && !itemIdBlacklistFilter(i)){
+		else if(ItemOBJ[i][1] == 62 && JobEquipItemSearch(ItemOBJ[i][2]) == 1 && !isItemOnBlacklist(i)){
 			workB[5][wsj[5]] = i;
 			wsj[5]++;
 		}
-		else if(ItemOBJ[i][1] == 63 && JobEquipItemSearch(ItemOBJ[i][2]) == 1 && !itemIdBlacklistFilter(i)){
+		else if(ItemOBJ[i][1] == 63 && JobEquipItemSearch(ItemOBJ[i][2]) == 1 && !isItemOnBlacklist(i)){
 			workB[6][wsj[6]] = i;
 			wsj[6]++;
 		}
-		else if(ItemOBJ[i][1] == 64 && JobEquipItemSearch(ItemOBJ[i][2]) == 1 && !itemIdBlacklistFilter(i)){
+		else if(ItemOBJ[i][1] == 64 && JobEquipItemSearch(ItemOBJ[i][2]) == 1 && !isItemOnBlacklist(i)){
 			workB[7][wsj[7]] = i;
 			wsj[7]++;
 		}
