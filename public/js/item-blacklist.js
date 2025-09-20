@@ -1,5 +1,5 @@
 // Filter function
-const itemIdBlacklistFilter = (itemId) => {
+const isItemOnBlacklist = (itemId) => {
     // item blocks
     if (itemId >= 575 && itemId <= 599) {
         return true
