@@ -903,12 +903,11 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	// Flat SP bonus addition	
 	w=0;
 
-	w += n_tok[14]; // n_tok -> ???
-
-	// Get SP bonus from Equipment, takes this from index 11 and 12 of the ItemOBJ array
-	// FIXME: this also adds one SP for each INT from the equipment, ie. from earring, morph hood, etc.
-	w += StPlusCalc2(4);
-	w += StPlusCalc2(7);
+	w += n_tok[14]; // n_tok[14] -> SP from equipment
+	// FIXME: this also adds one SP for each INT from the equipment, ie. from earring, morph hood, valk armor etc.
+	// Is this needed at all?
+	//w += StPlusCalc2(4);
+	//w += StPlusCalc2(7);
 
 	if(n_A_HEAD_DEF_PLUS >= 9 && n_A_card[8] == 298) // Carat Card
 		w += 150;
